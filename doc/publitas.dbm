@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1-beta" last-position="0,0" last-zoom="1"
+	 default-schema="public" default-owner="postgres">
+<tablespace name="PUBLITAS" directory="'/home/ninhojb/git/particular/publitas/DDLs'">
+	<role name="postgres"/>
+</tablespace>
+
+<database name="new_database">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="raw" protected="true" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<table name="fornecedor">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<position x="100" y="67"/>
+	<column name="id_fornecedor" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="cpf_cnpj" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nome" not-null="true">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="inscriacao_estadual">
+		<type name="varchar" length="15"/>
+	</column>
+	<column name="inscricao_municipal">
+		<type name="varchar" length="20"/>
+	</column>
+	<column name="endereco">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="numero">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="telefone">
+		<type name="varchar" length="15"/>
+	</column>
+	<column name="email">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_forncedor_pk" type="pk-constr" table="raw.fornecedor">
+		<columns names="id_fornecedor" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="formapagamento">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<position x="940" y="27"/>
+	<column name="id_form_pag" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="descricao">
+		<type name="varchar" length="20"/>
+	</column>
+	<constraint name="id_from_pag_pk" type="pk-constr" table="raw.formapagamento">
+		<columns names="id_form_pag" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="empresa">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<position x="960" y="307"/>
+	<column name="id_empresa" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="50"/>
+	</column>
+	<constraint name="id_empresa_pk" type="pk-constr" table="raw.empresa">
+		<columns names="id_empresa" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="despesa">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<position x="520" y="187"/>
+	<column name="id_despesa" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="id_fornecedor" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="id_form_pag" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="id_empresa" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="data_lancamento" not-null="true" default-value="current date">
+		<type name="date" length="0"/>
+	</column>
+	<column name="vencimento" not-null="true">
+		<type name="date" length="0"/>
+	</column>
+	<column name="numero_nota" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="grupo_contas_contabil" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="complemento">
+		<type name="varchar" length="50"/>
+	</column>
+	<column name="valor" not-null="true">
+		<type name="float" length="0"/>
+	</column>
+	<column name="data_pagamento">
+		<type name="date" length="0"/>
+	</column>
+	<constraint name="id_despesa_pk" type="pk-constr" table="raw.despesa">
+		<columns names="id_despesa" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<domain name="publitas" not-null="false">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<comment><![CDATA[banco de dados publitas]]></comment>
+		<type name="smallint" length="0"/>
+</domain>
+
+<constraint name="id_forncedor_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="raw.fornecedor" table="raw.despesa">
+	<columns names="id_fornecedor" ref-type="src-columns"/>
+	<columns names="id_fornecedor" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_form_pag_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="raw.formapagamento" table="raw.despesa">
+	<columns names="id_form_pag" ref-type="src-columns"/>
+	<columns names="id_form_pag" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="id_empresa_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="raw.empresa" table="raw.despesa">
+	<columns names="id_empresa" ref-type="src-columns"/>
+	<columns names="id_empresa" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_despesa_fornecedor" type="relfk"
+	 src-table="raw.despesa"
+	 dst-table="raw.fornecedor"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_despesa_formapagamento" type="relfk"
+	 src-table="raw.despesa"
+	 dst-table="raw.formapagamento"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_despesa_empresa" type="relfk"
+	 src-table="raw.despesa"
+	 dst-table="raw.empresa"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
