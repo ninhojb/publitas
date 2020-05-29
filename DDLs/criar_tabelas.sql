@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS raw AUTHORIZATION publitas;
+
 CREATE TABLE IF NOT EXISTS raw.fornecedor(
     id_fornecedor bigint NOT NULL,
     cpf_cnpj integer NOT NULL,
@@ -37,7 +39,7 @@ CREATE TABLE IF NOT EXISTS raw.despesa(
 	id_fornecedor bigint NOT NULL,
 	id_form_pag bigint NOT NULL,
 	id_empresa bigint NOT NULL,
-	data_lancamento date NOT NULL DEFAULT current date,
+	data_lancamento date NOT NULL DEFAULT CURRENT_TIMESTAMP,,
 	vencimento date NOT NULL,
 	numero_nota bigint NOT NULL,
 	grupo_contas_contabil bigint NOT NULL,

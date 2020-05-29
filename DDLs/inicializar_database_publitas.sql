@@ -1,8 +1,8 @@
 -- entra no container
-docker exec -it dev_postgres_1 bash
+docker exec -it docker_postgres_1 bash
 
 -- connecta via terminal
-psql -U postgres
+psql -U publitas
 
 
 -- COMMANDOS SQLs
@@ -21,4 +21,4 @@ exit
 CREATE SCHEMA IF NOT EXISTS raw AUTHORIZATION publitas;
 
 --Criar as tabelas
-\i /home/ninhojb/git/particular/publitas/DDLs/criar_tabelas.sql
+\i /home/ninhojb/git/particular/publitas/DDLs/criar_tabelas.sql;
