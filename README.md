@@ -1,2 +1,2 @@
 # publitas
-Projeto para cadastro fornecedor e suas notas
+Projeto para cadastro de fornecedores e suas notas
