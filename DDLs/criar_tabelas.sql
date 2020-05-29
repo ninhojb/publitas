@@ -8,23 +8,30 @@ CREATE TABLE IF NOT EXISTS raw.fornecedor(
 	numero integer,
 	telefone varchar(15),
 	email varchar(50),
-	CONSTRAINT id_forncedor_pk PRIMARY KEY (id_fornecedor)
+	CONSTRAINT pk_id_forncedor PRIMARY KEY (id_fornecedor)
 
 );
 
 CREATE TABLE IF NOT EXISTS raw.formapagamento(
 	id_form_pag bigint NOT NULL,
 	descricao varchar(20),
-	CONSTRAINT id_from_pag_pk PRIMARY KEY (id_form_pag)
+	CONSTRAINT pk_id_from_pag PRIMARY KEY (id_form_pag)
 
 );
 
 CREATE TABLE IF NOT EXISTS raw.empresa(
 	id_empresa bigint NOT NULL,
 	descricao varchar(50) NOT NULL,
-	CONSTRAINT id_empresa_pk PRIMARY KEY (id_empresa)
+	CONSTRAINT pk_id_empresa PRIMARY KEY (id_empresa)
 
 );
+CREATE TABLE raw.grupo_contas(
+	id_grupo_contas bigint NOT NULL,
+	descricao varchar(100) NOT NULL,
+	CONSTRAINT pk_pk_grupo_contas PRIMARY KEY (id_grupo_contas)
+
+);
+
 CREATE TABLE IF NOT EXISTS raw.despesa(
 	id_despesa bigint NOT NULL,
 	id_fornecedor bigint NOT NULL,
@@ -37,6 +44,6 @@ CREATE TABLE IF NOT EXISTS raw.despesa(
 	complemento varchar(50),
 	valor float NOT NULL,
 	data_pagamento date,
-	CONSTRAINT id_despesa_pk PRIMARY KEY (id_despesa)
+	CONSTRAINT pk_id_despesa PRIMARY KEY (id_despesa)
 
 );
