@@ -27,4 +27,3 @@ echo "${PRE} LISTANDO LOGS (ctrl+c NAO matarah os containers!)"
 echo ''
 echo "${HR}"
 echo ''
-sudo docker-compose logs -f
