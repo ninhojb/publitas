@@ -18,7 +18,5 @@ exit
 
 -- CRIA SCHEMAS
 -- use raw
-CREATE SCHEMA IF NOT EXISTS raw AUTHORIZATION publitas;
+--CREATE SCHEMA IF NOT EXISTS raw AUTHORIZATION publitas;
 
---Criar as tabelas
-\i /home/ninhojb/git/particular/publitas/DDLs/criar_tabelas.sql;
