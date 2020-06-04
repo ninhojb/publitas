@@ -31,3 +31,4 @@ echo "${PRE} LISTANDO LOGS (ctrl+c NAO matara os containers!)"
 echo ''
 echo "${HR}"
 echo ''
+sudo docker-compose logs -f
