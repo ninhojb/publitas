@@ -7,12 +7,11 @@ psql -U publitas
 
 -- COMMANDOS SQLs
 --create USER aldata with PASSWORD 'Prudencia@2019' CREATEDB;
-create user publitas with PASSWORD 'Prudencia@2020';
+create user ninhojb with PASSWORD 'Prudencia@2020';
 
-create DATABASE publitas
-    with OWNER publitas;
+create DATABASE publitas with OWNER ninhojb;
 
-grant ALL PRIVILEGES  on database publitas to publitas;
+grant ALL PRIVILEGES  on database publitas to ninhojb;
 
 exit
 

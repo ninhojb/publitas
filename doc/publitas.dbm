@@ -58,7 +58,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="formapagamento">
 	<schema name="raw"/>
 	<role name="postgres"/>
-	<position x="940" y="27"/>
+	<position x="880" y="40"/>
 	<column name="id_form_pag" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -73,7 +73,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="empresa">
 	<schema name="raw"/>
 	<role name="postgres"/>
-	<position x="960" y="307"/>
+	<position x="880" y="300"/>
 	<column name="id_empresa" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -88,7 +88,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <table name="despesa">
 	<schema name="raw"/>
 	<role name="postgres"/>
-	<position x="520" y="187"/>
+	<position x="480" y="127"/>
 	<column name="id_despesa" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
@@ -99,6 +99,9 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="bigint" length="0"/>
 	</column>
 	<column name="id_empresa" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="id_grupo_contas" not-null="true">
 		<type name="bigint" length="0"/>
 	</column>
 	<column name="data_lancamento" not-null="true" default-value="current date">
@@ -134,6 +137,21 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<type name="smallint" length="0"/>
 </domain>
 
+<table name="grupo_contas">
+	<schema name="raw"/>
+	<role name="postgres"/>
+	<position x="100" y="307"/>
+	<column name="id_grupo_contas" not-null="true">
+		<type name="bigint" length="0"/>
+	</column>
+	<column name="descricao" not-null="true">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="pk_pk_grupo_contas" type="pk-constr" table="raw.grupo_contas">
+		<columns names="id_grupo_contas" ref-type="src-columns"/>
+	</constraint>
+</table>
+
 <constraint name="id_forncedor_fk" type="fk-constr" comparison-type="MATCH FULL"
 	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="raw.fornecedor" table="raw.despesa">
 	<columns names="id_fornecedor" ref-type="src-columns"/>
@@ -152,6 +170,12 @@ CAUTION: Do not modify this file unless you know what you are doing.
 	<columns names="id_empresa" ref-type="dst-columns"/>
 </constraint>
 
+<constraint name="id_grupo_contas_fk" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="raw.grupo_contas" table="raw.despesa">
+	<columns names="id_grupo_contas" ref-type="src-columns"/>
+	<columns names="id_grupo_contas" ref-type="dst-columns"/>
+</constraint>
+
 <relationship name="rel_despesa_fornecedor" type="relfk"
 	 src-table="raw.despesa"
 	 dst-table="raw.fornecedor"
@@ -165,6 +189,11 @@ CAUTION: Do not modify this file unless you know what you are doing.
 <relationship name="rel_despesa_empresa" type="relfk"
 	 src-table="raw.despesa"
 	 dst-table="raw.empresa"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_despesa_grupo_contas" type="relfk"
+	 src-table="raw.despesa"
+	 dst-table="raw.grupo_contas"
 	 src-required="false" dst-required="false"/>
 
 </dbmodel>

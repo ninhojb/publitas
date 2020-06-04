@@ -4,7 +4,7 @@ module.exports = {
   client: 'postgresql',
   connection: {
     database: 'publitas',
-    user:     'publitas',
+    user:     'ninhojb',
     password: 'Prudencia@2020'
   },
   pool: {
