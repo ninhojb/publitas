@@ -62,7 +62,7 @@ module.exports = app => {
         .get(app.api.despesas.get)
         .post(app.api.despesas.save)
 
-    app.route('/depesas/:id')
+    app.route('/despesas/:id')
         // .all(app.config.passport.authenticate())
         .put(app.api.despesas.save)
         .get(app.api.despesas.getById)

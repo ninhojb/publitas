@@ -8,7 +8,7 @@ module.exports = app => {
         try {
             existsOrError(despesas.data_lancamento, 'data_lancamento não informado')
             existsOrError(despesas.vencimento, 'Novencimento não informado')
-            existsOrError(despesas.numero_nota, 'numero_nota não informado')
+            existsOrError(despesas.numero_nota, 'numero da nota não informado')
             existsOrError(despesas.valor, 'valor não informado')
             existsOrError(despesas.id_fornecedor, 'Codigo fornecedor não informado')
             existsOrError(despesas.id_form_pag, 'Codigo pagamento não informado')
@@ -57,7 +57,7 @@ module.exports = app => {
         app.db('raw.despesas')
             .where({ id: req.params.id })
             .first()
-            .then(forma => res.json(forma))
+            .then(despesa => res.json(despesa))
     }
 
     return { save, remove, get, getById }
