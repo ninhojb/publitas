@@ -34,4 +34,37 @@ module.exports = app => {
         .put(app.api.fornecedor.save)
         .get(app.api.fornecedor.getById)
         .delete(app.api.fornecedor.remove)
+
+    app.route('/empresa')
+        // .all(app.config.passport.authenticate())
+        .get(app.api.empresa.get)
+        .post(app.api.empresa.save)
+
+    app.route('/empresa/:id')
+        // .all(app.config.passport.authenticate())
+        .put(app.api.empresa.save)
+        .get(app.api.empresa.getById)
+        .delete(app.api.empresa.remove)
+
+    app.route('/grupocontas')
+        // .all(app.config.passport.authenticate())
+        .get(app.api.grupo_contas.get)
+        .post(app.api.grupo_contas.save)
+
+    app.route('/grupocontas/:id')
+        // .all(app.config.passport.authenticate())
+        .put(app.api.grupo_contas.save)
+        .get(app.api.grupo_contas.getById)
+        .delete(app.api.grupo_contas.remove)
+
+    app.route('/despesas')
+        // .all(app.config.passport.authenticate())
+        .get(app.api.despesas.get)
+        .post(app.api.despesas.save)
+
+    app.route('/despesas/:id')
+        // .all(app.config.passport.authenticate())
+        .put(app.api.despesas.save)
+        .get(app.api.despesas.getById)
+        .delete(app.api.despesas.remove)
 }
