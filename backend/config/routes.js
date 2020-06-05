@@ -49,11 +49,22 @@ module.exports = app => {
     app.route('/grupocontas')
         // .all(app.config.passport.authenticate())
         .get(app.api.grupo_contas.get)
-        .post(app.api.empresa.save)
+        .post(app.api.grupo_contas.save)
 
     app.route('/grupocontas/:id')
         // .all(app.config.passport.authenticate())
         .put(app.api.grupo_contas.save)
         .get(app.api.grupo_contas.getById)
         .delete(app.api.grupo_contas.remove)
+
+    app.route('/despesas')
+        // .all(app.config.passport.authenticate())
+        .get(app.api.despesas.get)
+        .post(app.api.despesas.save)
+
+    app.route('/depesas/:id')
+        // .all(app.config.passport.authenticate())
+        .put(app.api.despesas.save)
+        .get(app.api.despesas.getById)
+        .delete(app.api.despesas.remove)
 }
