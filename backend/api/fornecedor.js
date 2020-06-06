@@ -13,13 +13,13 @@ module.exports = app => {
         }
 
         if (fornecedor.id) {
-            app.db('raw.fornecedor')
+            app.db('fornecedor')
                 .update(fornecedor)
                 .where({ id: fornecedor.id })
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
-            app.db('raw.fornecedor')
+            app.db('fornecedor')
                 .insert(fornecedor)
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
@@ -27,7 +27,7 @@ module.exports = app => {
     }
     const remove = async (req, res) => {
         try {
-            const rowsDeleted = await app.db('raw.fornecedor')
+            const rowsDeleted = await app.db('fornecedor')
                 .where({ id: req.params.id }).del()
 
             try {
@@ -42,13 +42,13 @@ module.exports = app => {
         }
     }
     const get = (req, res) => {
-        app.db('raw.fornecedor')
+        app.db('fornecedor')
             .then(fornecedor => res.json(fornecedor))
             .catch(err => res.status(500).send(err))
     }
 
     const getById = (req, res) => {
-        app.db('raw.fornecedor')
+        app.db('fornecedor')
             .where({ id: req.params.id })
             .first()
             .then(forma => res.json(forma))

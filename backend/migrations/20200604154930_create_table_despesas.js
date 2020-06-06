@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('raw.despesas', table => {
+    return knex.schema.createTable('despesas', table => {
         table.increments('id').primary()
         table.date('data_lancamento').notNull()
         table.date('vencimento').notNull()
@@ -9,16 +9,16 @@ exports.up = function(knex) {
         table.float('valor').notNull()
         table.date('data_pagamento')
         table.integer('id_fornecedor').references('id')
-            .inTable('raw.fornecedor').notNull()
+            .inTable('fornecedor').notNull()
         table.integer('id_form_pag').references('id')
-            .inTable('raw.formapagamento').notNull()
+            .inTable('formapagamento').notNull()
         table.integer('id_grupo_contas').references('id')
-            .inTable('raw.grupo_contas').notNull()
+            .inTable('grupo_contas').notNull()
         table.integer('id_empresa').references('id')
-            .inTable('raw.empresa').notNull()
+            .inTable('empresa').notNull()
     })
   };
 
 exports.down = function(knex) {
-    return knex.schema.dropTable('raw.despesas')
+    return knex.schema.dropTable('despesas')
 };

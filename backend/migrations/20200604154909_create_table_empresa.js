@@ -1,10 +1,10 @@
 exports.up = function (knex) {
-    return knex.schema.createTable('raw.empresa', table => {
+    return knex.schema.createTable('empresa', table => {
         table.increments('id').primary()
-        table.string('nome')
+        table.string('nome').unique().notNull()
     })
 };
 
 exports.down = function (knex) {
-    return knex.schema.dropTable('raw.empresa')
+    return knex.schema.dropTable('empresa')
 };

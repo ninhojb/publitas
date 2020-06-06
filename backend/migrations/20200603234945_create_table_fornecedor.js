@@ -1,6 +1,6 @@
 
 exports.up = function(knex) {
-    return knex.schema.createTable('raw.fornecedor', table => {
+    return knex.schema.createTable('fornecedor', table => {
         table.increments('id').primary()
         table.string('cpf_cnpj').notNull().unique()
         table.string('nome').notNull()
@@ -14,5 +14,5 @@ exports.up = function(knex) {
   };
 
 exports.down = function(knex) {
-    return knex.schema.dropTable('raw.fornecedor')
+    return knex.schema.dropTable('fornecedor')
 };

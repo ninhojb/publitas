@@ -12,13 +12,13 @@ module.exports = app => {
         }
 
         if (grupo.id) {
-            app.db('raw.grupo_contas')
+            app.db('grupo_contas')
                 .update(grupo)
                 .where({ id: grupo.id })
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
-            app.db('raw.grupo_contas')
+            app.db('grupo_contas')
                 .insert(grupo)
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
@@ -26,7 +26,7 @@ module.exports = app => {
     }
     const remove = async (req, res) => {
         try {
-            const rowsDeleted = await app.db('raw.grupo_contas')
+            const rowsDeleted = await app.db('grupo_contas')
                 .where({ id: req.params.id }).del()
 
             try {
@@ -41,13 +41,13 @@ module.exports = app => {
         }
     }
     const get = (req, res) => {
-        app.db('raw.grupo_contas')
+        app.db('grupo_contas')
             .then(grupo => res.json(grupo))
             .catch(err => res.status(500).send(err))
     }
 
     const getById = (req, res) => {
-        app.db('raw.grupo_contas')
+        app.db('grupo_contas')
             .where({ id: req.params.id })
             .first()
             .then(forma => res.json(forma))

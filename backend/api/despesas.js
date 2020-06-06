@@ -19,13 +19,13 @@ module.exports = app => {
         }
 
         if (despesas.id) {
-            app.db('raw.despesas')
+            app.db('despesas')
                 .update(despesas)
                 .where({ id: despesas.id })
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
         } else {
-            app.db('raw.despesas')
+            app.db('despesas')
                 .insert(despesas)
                 .then(_ => res.status(204).send())
                 .catch(err => res.status(500).send(err))
@@ -33,7 +33,7 @@ module.exports = app => {
     }
     const remove = async (req, res) => {
         try {
-            const rowsDeleted = await app.db('raw.despesas')
+            const rowsDeleted = await app.db('despesas')
                 .where({ id: req.params.id }).del()
 
             try {
@@ -47,15 +47,43 @@ module.exports = app => {
             res.status(500).send(msg)
         }
     }
-    const get = (req, res) => {
-        app.db('raw.despesas')
-            .then(despesa => res.json(despesa))
+    // const get = (req, res) => {
+    //     app.db('raw.despesas')
+    //         .then(despesa => res.json(despesa))
+    //         .catch(err => res.status(500).send(err))
+    // }
+    const limit = 10 // usado para paginação
+    const get = async (req, res) => {
+        const page = req.query.page || 1
+
+        const result = await app.db('despesas').count('id').first()
+        const count = parseInt(result.count)
+
+        app.db('despesas')
+            // .select('id', 'data_lancamento', 'vencimento','numero_nota',
+            // 'complemento','valor','data_pagamento')
+            .limit(limit).offset(page * limit - limit)
+            .then(despesa => res.json({ data: despesa, count, limit }))
             .catch(err => res.status(500).send(err))
     }
 
     const getById = (req, res) => {
-        app.db('raw.despesas')
-            .where({ id: req.params.id })
+        app.db({d: 'despesas', f: 'fornecedor', 
+                e: 'empresa', g: 'grupo_contas', 
+                for: 'formapagamento'})
+                
+            .select('d.id', 'd.data_lancamento', 'd.vencimento','d.numero_nota',
+                    'd.complemento','d.valor','d.data_pagamento', 
+                    {fornecedor : 'f.nome'}, 
+                    {empresa :'e.nome'}, 
+                    {grupo_contas: 'g.descricao'}, 
+                    {forma_pagamento: 'for.descricao'})
+
+            .where({ 'd.id': req.params.id })
+            .whereRaw('?? = ??', ['d.id_fornecedor', 'f.id'])
+            .whereRaw('?? = ??', ['d.id_empresa', 'e.id'])
+            .whereRaw('?? = ??', ['d.id_grupo_contas', 'g.id'])
+            .whereRaw('?? = ??', ['d.id_form_pag', 'for.id'])
             .first()
             .then(despesa => res.json(despesa))
     }
