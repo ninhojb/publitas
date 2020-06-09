@@ -4,29 +4,31 @@
             <i class="fa fa-lg" :class="icon"></i>
         </a>
         <h1 class="title">
-          {{ title }}
-            
+            <router-link to="/">{{ title }}</router-link>
         </h1>
-       
+        <UserDropdown v-if="!hideUserDropdown" />
     </header>
 </template>
 
 <script>
+import UserDropdown from './UserDropdown'
+
 export default {
-    name: 'Header',    
+    name: 'Header',
+    components: { UserDropdown },
     props: {
         title: String,
         hideToggle: Boolean,
-        
+        hideUserDropdown: Boolean
     },
     computed: {
         icon() {
-            return "fa-angle-down"
+            return this.$store.state.isMenuVisible ? "fa-angle-left" : "fa-angle-down"
         }
     },
     methods: {
         toggleMenu() {
-            
+            this.$store.commit('toggleMenu')
         }
     }
 }
