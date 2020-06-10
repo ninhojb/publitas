@@ -71,6 +71,10 @@ module.exports = app => {
         .get(app.api.despesas.getById)
         .delete(admin(app.api.despesas.remove))
 
+    app.route('/despesas/:id/tables')
+        .all(app.config.passport.authenticate())
+        .get(app.api.despesas.getTableById)
+
     app.route('/stats')
         .all(app.config.passport.authenticate())
         .get(app.api.stat.get)

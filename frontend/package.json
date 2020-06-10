@@ -10,10 +10,12 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap-vue": "^2.15.0",
+    "chart.js": "^2.9.3",
     "font-awesome": "4.7.0",
     "highlightjs": "9.10.0",
     "liquor-tree": "0.2.32",
     "vue": "2.5.17",
+    "vue-chartjs": "^3.5.0",
     "vue-gravatar": "1.2.1",
     "vue-mq": "0.2.1",
     "vue-router": "3.0.1",

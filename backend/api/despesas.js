@@ -66,8 +66,14 @@ module.exports = app => {
             .then(despesa => res.json({ data: despesa, count, limit }))
             .catch(err => res.status(500).send(err))
     }
-
     const getById = (req, res) => {
+        app.db('despesas')
+            .where({ id: req.params.id })
+            .first()
+            .then(forma => res.json(forma))
+    }
+
+    const getTableById = (req, res) => {
         app.db({d: 'despesas', f: 'fornecedor', 
                 e: 'empresa', g: 'grupo_contas', 
                 for: 'formapagamento'})
@@ -88,5 +94,5 @@ module.exports = app => {
             .then(despesa => res.json(despesa))
     }
 
-    return { save, remove, get, getById }
+    return { save, remove, get, getById , getTableById}
 }
