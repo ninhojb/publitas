@@ -64,6 +64,10 @@ module.exports = app => {
         .all(app.config.passport.authenticate())
         .get(app.api.despesas.get)
         .post(admin(app.api.despesas.save))
+    
+    app.route('/despesas/grafico_g')
+        .all(app.config.passport.authenticate())
+        .get(app.api.despesas.getGrupoContas)
 
     app.route('/despesas/:id')
         .all(app.config.passport.authenticate())

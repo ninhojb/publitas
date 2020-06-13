@@ -1,5 +1,7 @@
 import 'font-awesome/css/font-awesome.css'
 import Vue from 'vue'
+// import '@/plugins/echarts';
+// import './../node_modules/bulma/css/bulma.css'
 
 import App from './App'
 

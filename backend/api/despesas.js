@@ -70,7 +70,18 @@ module.exports = app => {
         app.db('despesas')
             .where({ id: req.params.id })
             .first()
-            .then(forma => res.json(forma))
+            .then(despesa => res.json(despesa))
+            .catch(err => res.status(500).send(err))
+    }
+
+    const getGrupoContas =(req, res) => {
+        app.db({d: 'despesas',  g: 'grupo_contas'})
+            .select({grupo_contas: 'g.descricao'})
+            .sum({total: 'd.valor'})
+            .whereRaw('?? = ??', ['d.id_grupo_contas', 'g.id'])
+            .groupBy('grupo_contas')
+            .then(grupo => res.json({source: grupo}))
+            .catch(err => res.status(500).send(err))
     }
 
     const getTableById = (req, res) => {
@@ -92,7 +103,8 @@ module.exports = app => {
             .whereRaw('?? = ??', ['d.id_form_pag', 'for.id'])
             .first()
             .then(despesa => res.json(despesa))
+            .catch(err => res.status(500).send(err))
     }
 
-    return { save, remove, get, getById , getTableById}
+    return { save, remove, get, getById , getTableById, getGrupoContas}
 }

@@ -6,14 +6,16 @@
             <b-card no-body>
                 <b-tabs card>
                     <b-tab title="Grupo Contas" active>
+                        <h3>Grupo de contas</h3>
                         <GraficoLinha />
+                        
                     </b-tab>
                     <b-tab title="Forma Pagamento" >
-                        <!-- <FormaPagamentoAdmin /> -->
+                       <!-- <GraficosPagamento /> -->
                     </b-tab>
                   
                     <b-tab title="Fornecedor">
-                        <!-- <FornecedorAdmin /> -->
+                         <GraficoFornecedor />
                     </b-tab>
                     
                 </b-tabs>
@@ -24,16 +26,18 @@
 
 <script>
 import PageTitle from '../template/PageTitle'
-import GraficoLinha from './graficos'
-// import EmpresasAdmin from './EmpresasAdmin'
-// import GrupoContasAdmin from './GrupoContasAdmin'
+import GraficoLinha from './GraficosGrupoContas'
+import GraficoFornecedor from './GraficoFornecedor'
+// import GraficosPagamento from './GraficosPagamento'
 // import FormaPagamentoAdmin from './FormaPagamentoAdmin'
 // import UserAdmin from './UserAdmin'
 
 export default {
     name: 'AdminPages',
     components: { PageTitle, 
-                  GraficoLinha
+                  GraficoLinha,
+                  GraficoFornecedor
+                //   GraficosPagamento
                    }
 }
 </script>
