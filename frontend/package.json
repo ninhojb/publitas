@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.26",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.15.0",
     "chart.js": "^2.9.3",
     "echarts": "^4.8.0",
